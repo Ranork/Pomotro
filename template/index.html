@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pomotro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      background-color: transparent;
+      background-image: url('img/bg.png');
+      padding-left: 6px;
+      overflow: hidden;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .btn-link {
+      text-decoration: none;
+      color: white;
+      font-size: 12px;
+    }
+    .btn-link:hover {
+      color: rgba(255, 255, 255, 0.836);
+    }
+    .progress {
+      height: 40px;
+      background-color: transparent;
+      border-radius: 0;
+      position: relative;
+      padding-right: 20px;
+    }
+    .progress-bar {
+      background-color: #adadadcc;
+      height: 98%;
+      margin-top: 1px;
+    }
+    .progress-bar-break {
+      background-color: #1a6c3ec4;
+    }
+    .progress-text {
+      position: absolute;
+      color: #fff;
+      font-size: 18px;
+      letter-spacing: 1px;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding-top: 8px;
+      padding-right: 20px;
+    }
+    .progress-details {
+      color: #fff;
+      position: absolute;
+      width: 100%;
+      letter-spacing: 1px;
+      height: 100%;
+      text-align: right;
+      padding-top: 20px;
+      padding-right: 23px;
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2" style="padding: 5px;">
+      <button type="button" class="btn btn-link" id="act_btn" onclick="act_btn()" style="width: 100%; padding-left: 20px; padding-right: 2px;"><i class="fa-solid fa-play"></i></button>
+    </div>
+    <div class="col-10" style="padding: 0;">
+      <div class="progress">
+        <div class="progress-bar" id="prog-bar" role="progressbar" aria-label="Success example" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-text" id="time">00:00</div>
+        <div class="progress-details" id="period">0/4</div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha512-VK2zcvntEufaimc+efOYi622VN5ZacdnufnmX7zIhCPmjhKnOi9ZDMtg1/ug5l183f19gG1/cBstPO4D8N/Img==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!---- Trick Scripts ---->
+<script>
+  function setById(id, data) {
+    let elm = $('#' + id)
+    let elm_type = elm.prop('nodeName')
+    let is_data_empty = data === undefined || data === '' || data === null || data === 0
+    data = is_data_empty ? '' : data
+  
+    switch (elm_type) {
+      case 'INPUT':
+        elm.val(data); break;
+      case 'SELECT':
+        elm.val(data); break;
+      case 'TEXTAREA':
+        elm.val(data); break;
+      default:
+        elm.text(data); break;
+    }
+  }
+  
+  function getById(id) {
+    let elm = $('#' + id)
+    let elm_type = elm.prop('nodeName')
+  
+    switch (elm_type) {
+      case 'INPUT':
+        return elm.val();
+      case 'SELECT':
+        return elm.val();
+      case 'TEXTAREA':
+        return elm.val();
+      default:
+        return elm.text();
+    }
+  }
+
+  function time_str_convert(seconds) {
+    let minutes = Math.floor(seconds / 60);
+    let extraSeconds = seconds % 60;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
+    return minutes + ":" + extraSeconds
+  }
+</script>
+
+<script>
+
+// Like a sports car gauge
+window.onload = () => {
+  // Fill the bar
+  $('#prog-bar').css('width', '100%')
+
+  // Unload the bar
+  setTimeout(() => {
+    $('#prog-bar').css('width', '0%')
+    setById('time', time_str_convert(tour_time))
+  }, 700)
+}
+
+const tour_time = 25 * 60       // 25 min in seconds
+const sm_break_time = 5 * 60    // 5 min in seconds
+const lg_break_time = 15 * 60   // 15 min in seconds
+const max_tour = 4              // cycle
+
+var cur_time = 24.8 * 60
+var cur_tour = 0
+var playing = false
+
+
+
+
+async function start() {
+  playing = true
+  
+  while (playing) {
+
+    cur_time++
+
+    let seconds = tour_time - cur_time
+    setById('time', time_str_convert(seconds))
+
+    let ratio = (cur_time / tour_time) * 100
+    $('#prog-bar').css('width', ratio + '%')
+
+
+    if (cur_time > tour_time) {
+      cur_tour++
+      setById('period', cur_tour + "/" + max_tour)
+      
+      $('#prog-bar').addClass('progress-bar-break')
+
+      cur_time = 0;
+      let break_time = (cur_tour % max_tour === 0) ? lg_break_time : sm_break_time
+      while (cur_time < break_time && playing) {
+        cur_time++
+
+        let seconds = break_time - cur_time
+        setById('time', time_str_convert(seconds))
+  
+        let ratio = (100 - (cur_time / break_time) * 100)
+        $('#prog-bar').css('width', ratio + '%')
+        await new Promise(r => setTimeout(r, 1000));    // Sleep 1 second
+      }
+
+      
+      $('#prog-bar').removeClass('progress-bar-break')
+      setById('time', time_str_convert(tour_time))
+      cur_time = 0;
+
+    }
+
+    await new Promise(r => setTimeout(r, 1000));  // Sleep 1 second
+  }
+}
+
+async function stop() {
+  cur_time = 0
+  playing = false
+
+  setTimeout(() => {
+    $('#prog-bar').css('width', '0%')
+    setById('time', time_str_convert(tour_time))
+  }, 700)
+}
+
+function act_btn() {
+  if (!playing) {
+    start()
+    $('#act_btn').html('<i class="fa-solid fa-stop"></i>')
+  }
+  else {
+    stop()
+    $('#act_btn').html('<i class="fa-solid fa-play"></i>')
+  }
+}
+
+
+</script>
+
+</body>
+</html>

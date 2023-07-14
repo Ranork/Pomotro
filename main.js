@@ -3,12 +3,12 @@ const {app, BrowserWindow} = require('electron')
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 310,
+    width: 300,
     height: 40, 
     transparent: true,
     frame:false,
     resizable: false,
-    x: 1630,
+    x: 1620,
     y: 993,
     skipTaskbar: true,
   })
@@ -28,6 +28,7 @@ function createWindow () {
   })
 
   mainWindow.setAlwaysOnTop(true, 'floating');
+  setInterval(function(){ mainWindow.setAlwaysOnTop(true, 'floating');}, 5 * 1000); // every 5 seconds make it always on top
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
 }

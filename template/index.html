@@ -11,58 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <style>
-    body {
-      background-color: transparent;
-      background-image: url('img/bg.png');
-      padding-left: 6px;
-      overflow: hidden;
-      font-family: 'Orbitron', sans-serif;
-    }
-    .btn-link {
-      text-decoration: none;
-      color: white;
-      font-size: 12px;
-    }
-    .btn-link:hover {
-      color: rgba(255, 255, 255, 0.836);
-    }
-    .progress {
-      height: 40px;
-      background-color: transparent;
-      border-radius: 0;
-      position: relative;
-    }
-    .progress-bar {
-      background-color: #adadadcc;
-      height: 98%;
-      margin-top: 1px;
-    }
-    .progress-bar-break {
-      background-color: #1a6c3ec4;
-    }
-    .progress-text {
-      position: absolute;
-      color: #fff;
-      font-size: 18px;
-      letter-spacing: 1px;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      padding-top: 8px;
-      padding-right: 0px;
-    }
-    .progress-details {
-      color: #fff;
-      position: absolute;
-      width: 100%;
-      letter-spacing: 1px;
-      height: 100%;
-      text-align: right;
-      padding-top: 20px;
-      padding-right: 3px;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
@@ -86,50 +35,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha512-VK2zcvntEufaimc+efOYi622VN5ZacdnufnmX7zIhCPmjhKnOi9ZDMtg1/ug5l183f19gG1/cBstPO4D8N/Img==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!---- Trick Scripts ---->
-<script>
-  function setById(id, data) {
-    let elm = $('#' + id)
-    let elm_type = elm.prop('nodeName')
-    let is_data_empty = data === undefined || data === '' || data === null || data === 0
-    data = is_data_empty ? '' : data
-  
-    switch (elm_type) {
-      case 'INPUT':
-        elm.val(data); break;
-      case 'SELECT':
-        elm.val(data); break;
-      case 'TEXTAREA':
-        elm.val(data); break;
-      default:
-        elm.text(data); break;
-    }
-  }
-  
-  function getById(id) {
-    let elm = $('#' + id)
-    let elm_type = elm.prop('nodeName')
-  
-    switch (elm_type) {
-      case 'INPUT':
-        return elm.val();
-      case 'SELECT':
-        return elm.val();
-      case 'TEXTAREA':
-        return elm.val();
-      default:
-        return elm.text();
-    }
-  }
-
-  function time_str_convert(seconds) {
-    let minutes = Math.floor(seconds / 60);
-    let extraSeconds = seconds % 60;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
-    return minutes + ":" + extraSeconds
-  }
-</script>
+<script src="js/misc.js"></script>
+<script src="js/main.js"></script>
 
 <script>
 
@@ -141,87 +48,6 @@ window.onload = () => {
     $('#prog-bar').css('width', '0%')
     setById('time', time_str_convert(tour_time))
   }, 700)                                             // make it delayed
-}
-
-//* Construction variables
-const tour_time = 25 * 60       // 25 min in seconds
-const sm_break_time = 5 * 60    // 5 min in seconds
-const lg_break_time = 15 * 60   // 15 min in seconds
-const max_tour = 4              // cycle
-
-//* Dynamic variables
-var cur_time = 0                // Current time dynamic variable
-var cur_tour = 0                // Current tour dynamic variable
-var playing = false             // Playing or stopped tracker dynamic var
-
-
-//* Start Function
-async function start() {
-  playing = true                // Set the timer playing
-  
-  while (playing) {             // Player Cycle
-
-    cur_time++                  // add 1 second
-
-    let seconds = tour_time - cur_time                      // calculate remaining seconds
-    setById('time', time_str_convert(seconds))              // write to timer
-
-    let ratio = (cur_time / tour_time) * 100                // calculate remaining progress ratio
-    $('#prog-bar').css('width', ratio + '%')                // write to timer
-
-
-    if (cur_time > tour_time) {                             // if the tour is complated
-      cur_tour++                                            // add 1 to current tour
-      setById('period', cur_tour + "/" + max_tour)          // write to timer
-      
-      $('#prog-bar').addClass('progress-bar-break')         // change progress bar style
-
-      cur_time = 0;                                         // set current time to 0
-      let break_time = (cur_tour % max_tour === 0) ? lg_break_time : sm_break_time   // get break time (long or short)
-      while (cur_time < break_time && playing) {            // Break cycle
-        cur_time++                                          // add 1 second
-
-        let seconds = break_time - cur_time                 // calculate rem seconds
-        setById('time', time_str_convert(seconds))          // write to timer
-  
-        let ratio = (100 - (cur_time / break_time) * 100)   // calculate progress ratio (inversed)
-        $('#prog-bar').css('width', ratio + '%')            // write to timer
-        await new Promise(r => setTimeout(r, 1000));        // Sleep 1 second
-      }
-
-      
-      $('#prog-bar').removeClass('progress-bar-break')    // clear progress bar style
-      setById('time', time_str_convert(tour_time))        // write tour time to timer
-      cur_time = 0;                                       // set current time to 0
-
-    }
-
-    await new Promise(r => setTimeout(r, 1000));          // Sleep 1 second
-  }
-}
-
-//* Stop Function
-async function stop() {
-  cur_time = 0                                      // set current time to 0
-  playing = false                                   // stop player cycle
-
-  setTimeout(() => {
-    $('#prog-bar').css('width', '0%')               // set progress to 0
-    setById('time', time_str_convert(tour_time))    // set timer to tour time
-  }, 700)                                           // make it delayed
-}
-
-
-//* Start/Stop Action
-function act_btn() {
-  if (!playing) {
-    start()
-    $('#act_btn').html('<i class="fa-solid fa-stop"></i>')
-  }
-  else {
-    stop()
-    $('#act_btn').html('<i class="fa-solid fa-play"></i>')
-  }
 }
 
 

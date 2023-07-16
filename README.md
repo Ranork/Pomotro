@@ -1,15 +1,17 @@
 # Pomotro
 Basic & Mini Pomodoro Timer
 
-![Pomotro main screen](https://i.imgur.com/bUMS5kW.png)
-![Pomotro in work timer](https://i.imgur.com/BdS0zJl.png)
-![Pomotro in break timer](https://i.imgur.com/HVHDyuL.png)
+![Pomotro Timer](https://i.imgur.com/vo8S2AZ.png)
+<br><br><br>
+# Live Preview
+![Screen Shot](https://i.imgur.com/92vwSyb.png)
 <br>
+Always on top in the right bottom!
 <br>
 
 ## Overview
 Pomotro is inspired by pomotroid (by splode). In my free time i made an mini timer for myself. Looks pretty and works well! :)
-<br>
+<br><br>
 
 ## Features
 - Tracks your pomodoro time!
@@ -24,7 +26,6 @@ Get all files and open shell
 npm install
 ```
 Everything is ok!
-<br>
 <br>
 
 To start:

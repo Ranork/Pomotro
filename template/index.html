@@ -20,18 +20,20 @@
   <div class="row">
     <div class="col-2" style="padding: 5px;">
       <button type="button" class="btn btn-link" id="act_btn" onclick="act_btn()" style="width: 100%; padding-left: 20px; padding-right: 2px;"><i class="fa-solid fa-play"></i></button>
+      <!--- <button type="button" class="btn btn-link btn-settings"><i class="fa-solid fa-chevron-up"></i></button> ---->
     </div>
     <div class="col-10" style="padding: 0;">
       <div class="progress">
         <div class="progress-bar" id="prog-bar" role="progressbar" aria-label="Success example" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         <div class="progress-text" id="time">00:00</div>
+        <div class="progress-alt" id="period_expl">START</div>
         <div class="progress-details" id="period">0/4</div>
       </div>
     </div>
   </div>
 </div>
-  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="js/jquery-3.7.0.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha512-VK2zcvntEufaimc+efOYi622VN5ZacdnufnmX7zIhCPmjhKnOi9ZDMtg1/ug5l183f19gG1/cBstPO4D8N/Img==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -42,12 +44,15 @@
 
 // Like a sports car gauge effect
 window.onload = () => {  
-  $('#prog-bar').css('width', '100%')                 // Fill the bar
+  setTimeout(() => {
+    $('#prog-bar').css('width', '100%')                 // Fill the bar
 
-  setTimeout(() => {                                  // Unload the bar
-    $('#prog-bar').css('width', '0%')
-    setById('time', time_str_convert(tour_time))
-  }, 700)                                             // make it delayed
+    setTimeout(() => {                                  // Unload the bar
+      $('#prog-bar').css('width', '0%')
+      setById('time', time_str_convert(tour_time))
+    }, 700)                                             // make it delayed
+  }, 200)
+  
 }
 
 

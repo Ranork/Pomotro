@@ -21,6 +21,7 @@ async function start() {
 
     let seconds = tour_time - cur_time                      // calculate remaining seconds
     setById('time', time_str_convert(seconds))              // write to timer
+    setById('period_expl', 'FOCUS')
 
     let ratio = (cur_time / tour_time) * 100                // calculate remaining progress ratio
     $('#prog-bar').css('width', ratio + '%')                // write to timer
@@ -29,6 +30,7 @@ async function start() {
     if (cur_time > tour_time) {                             // if the tour is complated
       cur_tour++                                            // add 1 to current tour
       setById('period', cur_tour + "/" + max_tour)          // write to timer
+      setById('period_expl', (cur_tour % max_tour === 0) ? 'LONG BREAK' : 'SHORT BREAK')
       
       $('#prog-bar').addClass('progress-bar-break')         // change progress bar style
 
@@ -48,6 +50,7 @@ async function start() {
       
       $('#prog-bar').removeClass('progress-bar-break')    // clear progress bar style
       setById('time', time_str_convert(tour_time))        // write tour time to timer
+      setById('period_expl', 'FOCUS')
       cur_time = 0;                                       // set current time to 0
 
     }
@@ -63,8 +66,9 @@ async function stop() {
 
   setTimeout(() => {
     $('#prog-bar').css('width', '0%')               // set progress to 0
+    setById('period_expl', 'START')
     setById('time', time_str_convert(tour_time))    // set timer to tour time
-  }, 700)                                           // make it delayed
+  }, 200)                                           // make it delayed
 }
 
 

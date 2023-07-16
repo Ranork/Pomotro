@@ -13,6 +13,15 @@ body {
 .btn-link:hover {
   color: rgba(255, 255, 255, 0.836);
 }
+
+.btn-settings {
+  position: absolute;
+  z-index: 999;
+  right: -5px;
+  top: 0;
+  font-size: 10px;
+}
+
 .progress {
   height: 40px;
   background-color: transparent;
@@ -30,21 +39,33 @@ body {
 .progress-text {
   position: absolute;
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 1px;
   width: 100%;
   height: 100%;
   text-align: center;
-  padding-top: 8px;
+  padding-top: 6px;
+  padding-right: 0px;
+}
+.progress-alt {
+  position: absolute;
+  color: #ffffff83;
+  font-size: 8px;
+  letter-spacing: 1px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 25px;
   padding-right: 0px;
 }
 .progress-details {
-  color: #fff;
+  color: #ffffffb7;
   position: absolute;
   width: 100%;
   letter-spacing: 1px;
   height: 100%;
   text-align: right;
-  padding-top: 20px;
+  font-size: 10px;
+  padding-top: 24px;
   padding-right: 3px;
 }

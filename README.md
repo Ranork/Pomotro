@@ -1,5 +1,5 @@
 # Pomotro
-Basic & Mini Pomodoro Timer
+Basic & Mini Pomodoro Timer for desktop!
 
 ![Pomotro Timer](https://i.imgur.com/vo8S2AZ.png)
 <br><br><br>

@@ -10,7 +10,7 @@ Always on top in the right bottom!
 <br>
 
 ## Overview
-Pomotro is inspired by pomotroid (by splode). In my free time i made an mini timer for myself. Looks pretty and works well! :)
+Pomotro is inspired by pomotroid (by splode). In my free time i made a mini timer for myself. Looks pretty and works well! :)
 <br><br>
 
 ## Features

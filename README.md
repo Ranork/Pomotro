@@ -1,10 +1,16 @@
 # Pomotro
 Basic & Mini Pomodoro Timer for desktop!
 
-![Pomotro Timer](https://i.imgur.com/vo8S2AZ.png)
+<p align="center">
+  <img src="https://i.imgur.com/vo8S2AZ.png">
+</p>
+
 <br><br><br>
 # Live Preview
-![Screen Shot](https://i.imgur.com/92vwSyb.png)
+
+<p align="center">
+  <img src=https://i.imgur.com/92vwSyb.png">
+</p>
 <br>
 Always on top in the right bottom!
 <br>

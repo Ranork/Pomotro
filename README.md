@@ -36,16 +36,22 @@ Pomotro is inspired by the popular Pomodroid app created by splode, but with a m
 Follow these steps to set up and run Pomotro on your desktop:
 
 1. Clone the repository:
-"git clone https://github.com/Ranork/Pomotro.git"
-"cd Pomotro"
+```
+git clone https://github.com/Ranork/Pomotro.git
+cd Pomotro
+```
 
 2. Install dependencies:
-"npm install"
+```
+npm install
+```
 
 ## Usage
 To launch Pomotro, run the following command in your terminal:
 
-"npm run start"
+```
+npm run start
+```
 
 The app will start, and the timer will appear in the bottom right corner of your screen. Click on the timer to start or stop the Pomodoro session.
 

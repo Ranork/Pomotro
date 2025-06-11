@@ -16,10 +16,10 @@
 </head>
 <body>
 
-<div class="container-fluid">
+<div class="container-fluid draggable-element">
   <div class="row">
     <div class="col-2" style="padding: 5px;">
-      <button type="button" class="btn btn-link" id="act_btn" onclick="act_btn()" style="width: 100%; padding-left: 20px; padding-right: 2px;"><i class="fa-solid fa-play"></i></button>
+      <button type="button" class="btn btn-link non-draggable-element" id="act_btn" onclick="act_btn()" style="width: 100%; padding-left: 20px; padding-right: 2px;"><i class="fa-solid fa-play"></i></button>
       <!--- <button type="button" class="btn btn-link btn-settings"><i class="fa-solid fa-chevron-up"></i></button> ---->
     </div>
     <div class="col-10" style="padding: 0;">
@@ -43,7 +43,7 @@
 <script>
 
 // Like a sports car gauge effect
-window.onload = () => {  
+window.onload = () => {
   setTimeout(() => {
     $('#prog-bar').css('width', '100%')                 // Fill the bar
 
@@ -52,7 +52,7 @@ window.onload = () => {
       setById('time', time_str_convert(tour_time))
     }, 700)                                             // make it delayed
   }, 200)
-  
+
 }
 
 

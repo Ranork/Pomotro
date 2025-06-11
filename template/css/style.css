@@ -4,6 +4,13 @@ body {
   padding-left: 6px;
   overflow: hidden;
   font-family: 'Orbitron', sans-serif;
+
+}
+.draggable-element {
+  app-region: drag;
+}
+.non-draggable-element {
+  app-region: no-drag;
 }
 .btn-link {
   text-decoration: none;

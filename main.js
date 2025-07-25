@@ -57,7 +57,7 @@ function createTray() {
     },
     { type: 'separator' },
     {
-      label: 'Çıkış',
+      label: 'Exit',
       click: () => {
         app.quit()
       }

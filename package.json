@@ -1,11 +1,11 @@
 {
   "name": "pomotro",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "npx electron-packager . Pomotro --platform=win32 --arch=x64",
+    "build": "npx electron-packager . Pomotro --platform=win32 --arch=x64 --out=dist --icon=icon.ico",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

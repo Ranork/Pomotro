@@ -1,17 +1,24 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, screen, Tray, Menu, shell} = require('electron')
+const path = require('path')
 
 var mainWindow
 
-function createWindow () {
+function createWindow (display) {
+  const width = 310
+  const height = 40
+
+  const { width: screenWidth, height: screenHeight } = display.workAreaSize // veya display.bounds
+
+  const x = screenWidth - width
+  const y = screenHeight - height
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 300,
-    height: 40, 
+    width, height, 
     transparent: true,
     frame:false,
     resizable: false,
-    x: 1620,
-    y: 993,
+    x, y,
     skipTaskbar: true,
   })
 
@@ -38,7 +45,33 @@ function createWindow () {
   }, 5 * 1000); // every 5 seconds make it always on top
 }
 
+function createTray() {
+  const iconPath = path.join(__dirname, 'icon.png') // icon.ico da olabilir
+
+  tray = new Tray(iconPath)
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Github',
+      click: () => { shell.openExternal('https://github.com/Ranork/Pomotro') }
+    },
+    { type: 'separator' },
+    {
+      label: 'Çıkış',
+      click: () => {
+        app.quit()
+      }
+    }
+  ])
+
+  tray.setToolTip('Pomotro')
+  tray.setContextMenu(contextMenu)
+}
+
+
 app.on('ready', () => {
+  const primaryDisplay = screen.getPrimaryDisplay()
   console.log(process.pid);
-  createWindow()
+  createWindow(primaryDisplay)
+  createTray()
 })
